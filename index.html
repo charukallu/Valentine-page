@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Charu ❤️ Aravind — Proposal</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family:cursive;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd1dc,#ffc0cb);
+  text-align:center;
+}
+
+.card{
+  background:white;
+  padding:28px;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  max-width:92%;
+  z-index:2;
+}
+
+button{
+  padding:14px 24px;
+  font-size:18px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+}
+
+#yes{background:#ff4d88;color:white;}
+#no{background:#ccc;position:absolute;}
+
+#typeMsg{
+  color:#ff4d88;
+  font-size:20px;
+  margin-top:12px;
+  min-height:48px;
+}
+
+#ring{
+  display:none;
+  font-size:48px;
+  animation:pop 1s ease infinite alternate;
+}
+
+@keyframes pop{
+  from{transform:scale(1);} 
+  to{transform:scale(1.25);} 
+}
+
+#player{display:none;margin-top:12px;}
+
+.heart{
+  position:absolute;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(100vh);} 
+  to{transform:translateY(-10vh);} 
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>💌 Charu → Aravind 💌</h2>
+  <h1>Will you be my Valentine? 💗</h1>
+
+  <button id="yes">YES 😍</button>
+  <button id="no">NO 🙈</button>
+
+  <div id="ring">💍</div>
+  <div id="typeMsg"></div>
+
+  <div id="player">
+    <h3>Our song 🎵</h3>
+    <iframe width="300" height="170"
+      src="https://www.youtube.com/embed/kd72ieB82WA"
+      allowfullscreen></iframe>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const yes=no=document.getElementById("yes");
+const noBtn=document.getElementById("no");
+const msg=document.getElementById("typeMsg");
+const ring=document.getElementById("ring");
+const player=document.getElementById("player");
+
+/* NO escape */
+noBtn.onmouseover=()=>{
+  noBtn.style.left=Math.random()*80+"vw";
+  noBtn.style.top=Math.random()*80+"vh";
+};
+
+/* Typewriter text */
+function typeText(text,i=0){
+  if(i<text.length){
+    msg.innerHTML+=text[i];
+    setTimeout(()=>typeText(text,i+1),40);
+  }
+}
+
+/* YES click */
+yes.onclick=()=>{
+  ring.style.display="block";
+  player.style.display="block";
+
+  typeText("Aravind ❤️ You are my today, tomorrow, and forever. Be mine always 💞");
+
+  confetti({particleCount:350,spread:150,origin:{y:.6}});
+};
+
+/* heart rain */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(14+Math.random()*22)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
